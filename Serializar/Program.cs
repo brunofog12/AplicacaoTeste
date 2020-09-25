@@ -36,6 +36,7 @@ namespace Serializar
             };
 
             ValidaCpf(usuario.Cpf);
+            ValidaCnpj(estabelecimento.Cnpj);
 
             Console.ReadKey();
 
@@ -70,7 +71,20 @@ namespace Serializar
             }
             catch (System.Exception ex)
             {
-                Console.WriteLine("O CPF " + cpf + " é inválido. " + ex);
+                Console.WriteLine("O CPF " + cpf + " é inválido. " + ex.Message);
+            }
+        }
+
+        private static void ValidaCnpj(string cnpj)
+        {
+            try
+            {
+                new CNPJValidator().AssertValid(cnpj);
+                Console.WriteLine("O CNPJ " + cnpj + " é válido. ");
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine("O CNPJ " + cnpj + " é inválido. " + ex.Message);
             }
         }
     }
