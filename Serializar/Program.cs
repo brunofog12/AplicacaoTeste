@@ -1,9 +1,13 @@
 ﻿using BibliotecaBruno;
 using Caelum.Stella.CSharp.Format;
+using Caelum.Stella.CSharp.Http;
+using Caelum.Stella.CSharp.Inwords;
 using Caelum.Stella.CSharp.Validation;
+using Caelum.Stella.CSharp.Vault;
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Net.Http;
 using System.Web.Script.Serialization;
 using System.Xml.Serialization;
 
@@ -40,6 +44,31 @@ namespace Serializar
             ValidaCnpj(estabelecimento.Cnpj);
             ValidaTitulo("15948612");
 
+            double valor = 7536.80;
+            string numeroExtenso = new Numero(valor).Extenso();
+            Console.WriteLine(numeroExtenso);
+            string moedaExtenso = new MoedaBRL(valor).Extenso();
+            Console.WriteLine(moedaExtenso);
+            Money dinheiro = new Money(Currency.BRL, 10.56);
+            Console.WriteLine(dinheiro.ToString());
+
+            string cep = "60357161";
+            //string resultado = GetEndereco(cep);
+            //Console.WriteLine(resultado);
+
+            try
+            {
+                string cepJason = new ViaCEP().GetEnderecoJson(cep);
+                var cepEndereco = new ViaCEP().GetEndereco(cep);
+                Console.WriteLine(cepJason);
+                Console.WriteLine(cepEndereco.Bairro);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erro: " + ex.Message);
+            }
+            
+
             Console.ReadKey();
 
             StreamWriter stream = new StreamWriter(@"C:\Users\bruno\source\repos\Serializar\xmlUsuario.xml");
@@ -62,6 +91,18 @@ namespace Serializar
             streamjs.WriteLine(objSerializeJson2);
             streamjs.WriteLine(objSerializeJson3);
             streamjs.Close();
+        }
+
+        private static string GetEndereco(string cep)
+        {
+            string urlCep = "http://viacep.com.br/ws/" + cep + "/json/";
+            string resultado = new HttpClient().GetStringAsync(urlCep).Result;
+            return resultado;
+        }
+
+        private static void HttpClient()
+        {
+            throw new NotImplementedException();
         }
 
         private static void ValidaCpf(string cpf)
