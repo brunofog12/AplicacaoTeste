@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Usuario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Nome>Bruno Gomes</Nome>
+  <Email>bruno.gomes@fitbank.com.br</Email>
+  <Cpf>123.456.789-00</Cpf>
+</Usuario><?xml version="1.0" encoding="utf-8"?>
+<Estabelecimento xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ID>1</ID>
+  <RazaoSocial>Empresa Teste</RazaoSocial>
+  <Cnpj>01236481616413</Cnpj>
+</Estabelecimento><?xml version="1.0" encoding="utf-8"?>
+<Estabelecimento xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ID>2</ID>
+  <RazaoSocial>Empresa 02</RazaoSocial>
+  <Cnpj>41313131</Cnpj>
+</Estabelecimento>
