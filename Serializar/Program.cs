@@ -1,4 +1,5 @@
 ﻿using BibliotecaBruno;
+using Caelum.Stella.CSharp.Format;
 using Caelum.Stella.CSharp.Validation;
 using System;
 using System.Diagnostics;
@@ -37,6 +38,7 @@ namespace Serializar
 
             ValidaCpf(usuario.Cpf);
             ValidaCnpj(estabelecimento.Cnpj);
+            ValidaTitulo("15948612");
 
             Console.ReadKey();
 
@@ -67,11 +69,13 @@ namespace Serializar
             try
             {
                 new CPFValidator().AssertValid(cpf);
-                Console.WriteLine("O CPF " + cpf + " é válido. ");
+                string cpfFormatado = new CPFFormatter().Format(cpf);
+                Console.WriteLine("O CPF " + cpfFormatado + " é válido. ");
             }
             catch (System.Exception ex)
             {
-                Console.WriteLine("O CPF " + cpf + " é inválido. " + ex.Message);
+                string cpfFormatado = new CPFFormatter().Format(cpf);
+                Console.WriteLine("O CPF " + cpfFormatado + " é inválido. " + ex.Message);
             }
         }
 
@@ -80,12 +84,31 @@ namespace Serializar
             try
             {
                 new CNPJValidator().AssertValid(cnpj);
-                Console.WriteLine("O CNPJ " + cnpj + " é válido. ");
+                string cnpjFormatado = new CNPJFormatter().Format(cnpj);
+                Console.WriteLine("O CNPJ " + cnpjFormatado + " é válido. ");
             }
             catch (System.Exception ex)
             {
-                Console.WriteLine("O CNPJ " + cnpj + " é inválido. " + ex.Message);
+                string cnpjFormatado = new CNPJFormatter().Format(cnpj);
+                Console.WriteLine("O CNPJ " + cnpjFormatado + " é inválido. " + ex.Message);
             }
         }
+
+        private static void ValidaTitulo(string titulo)
+        {
+            try
+            {
+                new TituloEleitoralValidator().AssertValid(titulo);
+                string tituloFormatado = new TituloEleitoralFormatter().Format(titulo);
+                Console.WriteLine("O título " + tituloFormatado + " é válido. ");
+            }
+            catch (System.Exception ex)
+            {
+                string tituloFormatado = new TituloEleitoralFormatter().Format(titulo);
+                Console.WriteLine("O título " + tituloFormatado + " é inválido. " + ex.Message);
+            }
+        }
+
+
     }
 }
